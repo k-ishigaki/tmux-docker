@@ -1,4 +1,4 @@
-FROM alpine as builder
+FROM alpine:3.11 as builder
 
 RUN apk add --no-cache fish bash tmux git
 
@@ -12,7 +12,7 @@ RUN git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && \
 
 RUN find ${HOME} | xargs -n 50 -P 4 chmod o+rwx
 
-FROM alpine
+FROM alpine:3.11
 LABEL maintainer="Kazuki Ishigaki<k-ishigaki@frontier.hokudai.ac.jp>"
 
 RUN apk add --no-cache bash fish tmux su-exec
