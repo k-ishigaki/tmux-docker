@@ -22,13 +22,13 @@ RUN chmod o+rwx /root
 ENV USER_ID 0
 ENV GROUP_ID 0
 RUN { \
-	echo '#!/bin/sh -e'; \
-	echo 'if [ -z "`getent passwd ${USER_ID}`" ]; then'; \
-	echo '    addgroup -g ${GROUP_ID} -S group'; \
-	echo '    adduser -h /root -G group -S -D -H -u ${USER_ID} user'; \
-	echo 'fi'; \
-	echo 'exec su-exec ${USER_ID}:${GROUP_ID} "$@"'; \
-	} > /entrypoint && chmod +x /entrypoint
+    echo '#!/bin/sh -e'; \
+    echo 'if [ -z "`getent passwd ${USER_ID}`" ]; then'; \
+    echo '    addgroup -g ${GROUP_ID} -S group'; \
+    echo '    adduser -h /root -G group -S -D -H -u ${USER_ID} user'; \
+    echo 'fi'; \
+    echo 'exec su-exec ${USER_ID}:${GROUP_ID} "$@"'; \
+    } > /entrypoint && chmod +x /entrypoint
 SHELL [ "/usr/bin/fish", "-c" ]
 ENTRYPOINT [ "/entrypoint" ]
 CMD [ "tmux", "-2" ]
