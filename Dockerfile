@@ -1,4 +1,4 @@
-FROM alpine:3.18
+FROM alpine:3.18 as builder
 
 RUN apk add --no-cache fish~=3.6 bash~=5.2 tmux~=3.3 git~=2.40
 
@@ -9,3 +9,8 @@ RUN git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && \
     # wait for tmux server launch
     sleep 1 && \
     ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+
+FROM alpine:3.18
+
+RUN apk add --no-cache fish~=3.6 bash~=5.2 tmux~=3.3
+COPY --from=builder /root /root
