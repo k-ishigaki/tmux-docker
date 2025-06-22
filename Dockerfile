@@ -1,4 +1,4 @@
-FROM alpine:3.18 as builder
+FROM alpine:3.18 AS builder
 
 RUN apk add --no-cache fish~=3.6 bash~=5.2 tmux~=3.3 git~=2.40
 
